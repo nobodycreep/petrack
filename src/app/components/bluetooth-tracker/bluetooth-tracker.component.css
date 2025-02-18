@@ -1,0 +1,102 @@
+/* Estilo general para toda la página */
+body {
+  background-color: #121212;  /* Fondo negro para la aplicación */
+  color: #fafcff;  /* Texto claro para asegurar legibilidad */
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Estilos generales para el tracker */
+.tracker {
+  padding: 20px;
+  text-align: center;
+  background-color: #1c1c1c;  /* Fondo ligeramente más claro que el fondo de la app */
+  color: #fafcff;  /* Texto blanco */
+  font-family: 'Roboto', sans-serif;  /* Fuente moderna */
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  margin: 40px auto;  /* Centrado y márgenes adecuados */
+  transition: all 0.3s ease;
+}
+
+/* Animación de hover para el tracker */
+.tracker:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Título principal */
+.tracker h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #fafcff;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+/* Estilo de los botones */
+button {
+  background-color: #00796b;  /* Verde para conectar */
+  color: white;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin: 10px 0;
+}
+
+button:hover {
+  background-color: #388e3c;  /* Verde más oscuro al hacer hover */
+  transform: translateY(-2px); /* Efecto de elevación */
+}
+
+/* Estilo de botón Desconectar */
+button[ng-reflect-ng-if="isConnected"] {
+  background-color: #f44336;  /* Rojo para desconectar */
+}
+
+button[ng-reflect-ng-if="isConnected"]:hover {
+  background-color: #d32f2f; /* Rojo más oscuro en hover */
+}
+
+/* Mensaje cuando se conecta el dispositivo */
+p {
+  font-size: 1rem;
+  color: #4caf50;  /* Verde suave para el mensaje */
+  margin-top: 20px;
+  font-weight: 600;
+  animation: fadeIn 1.5s ease-in-out; /* Animación de fade-in para el mensaje */
+}
+
+/* Animación de fade-in */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Media Query para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .tracker {
+    padding: 15px;
+  }
+
+  .tracker h1 {
+    font-size: 1.5rem;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+}

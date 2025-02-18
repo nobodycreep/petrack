@@ -1,0 +1,108 @@
+/* Estilos generales para la lista de recordatorios */
+.recordatorios-container {
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    background-color: #121212;  /* Fondo oscuro para el contenedor */
+  }
+  
+  .title {
+    font-size: 2rem;
+    color: #fafcff;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilo para los cards de recordatorios */
+  .recordatorio-card {
+    margin-bottom: 20px;
+  }
+  
+  mat-card {
+    background-color: #1c1c1c; /* Fondo oscuro para el card */
+    color: #fafcff; /* Texto claro */
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Animación de los cards */
+  mat-card:hover {
+    transform: translateY(-5px);  /* Elevación ligera al pasar el ratón */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Títulos dentro de los cards */
+  mat-card-header {
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  
+  mat-card-content {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 100%;
+  }
+  
+  button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+  
+  /* Botón de "Realizado" */
+  button.mat-raised-button[ng-reflect-color='primary'] {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  /* Botón de "Eliminar" */
+  button.mat-raised-button[ng-reflect-color='warn'] {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  /* Media Query para pantallas pequeñas */
+  @media (max-width: 768px) {
+    .recordatorios-container {
+      padding: 15px;  /* Reducir padding en pantallas más pequeñas */
+    }
+  
+    .title {
+      font-size: 1.5rem;  /* Reducir tamaño del título en móviles */
+    }
+  
+    mat-card {
+      padding: 15px;
+    }
+  
+    mat-card-header {
+      font-size: 1.1rem;  /* Reducir tamaño del título dentro del card */
+    }
+  
+    mat-card-content {
+      font-size: 0.9rem;  /* Ajustar tamaño de la descripción */
+    }
+  
+    button {
+      font-size: 12px;  /* Reducir tamaño de los botones */
+      padding: 8px 16px;  /* Ajustar el padding de los botones */
+    }
+  
+    button.mat-raised-button[ng-reflect-color='primary'] {
+      background-color: #388e3c;
+    }
+  
+    button.mat-raised-button[ng-reflect-color='warn'] {
+      background-color: #d32f2f;
+    }
+  }
+  

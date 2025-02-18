@@ -1,0 +1,118 @@
+/* Establecemos la fuente global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif; /* Usamos la fuente Roboto */
+  }
+  
+  /* Contenedor principal */
+  .perfil-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #121212; /* Fondo oscuro */
+    padding: 20px;
+  }
+  
+  /* Tarjeta de perfil */
+  .perfil-card {
+    width: 100%;
+    max-width: 450px; /* Un poco más ancho */
+    background-color: #1c1c1c; /* Fondo oscuro */
+    border-radius: 15px;
+    padding: 35px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Sombra suave */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  /* Cabecera del perfil */
+  .perfil-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .mascota-img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid #00796b; /* Borde verde suave */
+    font-size: 26px ;
+    font-weight: 600;
+  }
+  
+  .nombre {
+    font-size: 26px;
+    font-weight: 600;
+    color: #e0e0e0; /* Gris claro para mejor contraste */
+  }
+  
+  .raza-edad {
+    font-size: 16px;
+    color: #b0b0b0; /* Gris suave */
+  }
+  
+  /* Cuerpo del perfil */
+  .perfil-body {
+    text-align: left;
+    font-size: 16px;
+    color: #e0e0e0; /* Gris claro */
+    margin-bottom: 30px;
+    line-height: 1.5;
+    max-width: 320px; /* Limitar el ancho para mayor legibilidad */
+  }
+  
+  /* Acciones de perfil */
+  .perfil-actions {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  button {
+    padding: 12px 25px;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #00796b; /* Verde suave */
+    border: none;
+    border-radius: 30px;
+    outline: none;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+  }
+  
+  button:hover {
+    background-color: #004d40; /* Verde más oscuro */
+    transform: scale(1.05); /* Efecto de aumento */
+  }
+  
+  button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Resaltado al enfocar */
+  }
+  .input-edit {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    margin: 10px 0;
+    border: 2px solid #00796b;
+    border-radius: 8px;
+    background-color: #1c1c1c;
+    color: #e0e0e0;
+  }
+  .input-edit:focus {
+    outline: none;
+    border-color: #004d40;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+  

@@ -1,0 +1,47 @@
+<div class="container">
+  <div *ngIf="!user" class="login-container">
+    <button (click)="showLoginModal = true">Login</button>
+  </div>
+
+  <div *ngIf="user" class="profile-card">
+    <div class="profile-header">
+      <div class="avatar">
+        <img [src]="user.photoURL || 'assets/default-avatar.png'" [alt]="user.displayName || 'Usuario'">
+      </div>
+      <div class="user-info">
+        <h2>{{profile.name}}</h2>
+        <p>{{user.email}}</p>
+      </div>
+    </div>
+    <div class="profile-content">
+      <div *ngIf="isEditing">
+        <div class="form-group">
+          <label for="name">Nombre</label>
+          <input id="name" [(ngModel)]="profile.name" placeholder="Tu nombre">
+        </div>
+        <div class="form-group">
+          <label for="bio">Biografía</label>
+          <input id="bio" [(ngModel)]="profile.bio" placeholder="Tu biografía">
+        </div>
+      </div>
+      <div *ngIf="!isEditing">
+        <h3>Biografía</h3>
+        <p>{{profile.bio || 'Aún no hay biografía.'}}</p>
+      </div>
+    </div>
+    <div class="profile-footer">
+      <button *ngIf="isEditing" (click)="handleSave()">Guardar</button>
+      <button *ngIf="!isEditing" (click)="isEditing = true">Editar Perfil</button>
+      <button (click)="handleLogout()">Cerrar Sesión</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showLoginModal" class="modal">
+  <div class="modal-content">
+    <h2>Iniciar Sesión en tu Cuenta</h2>
+    <p>Inicia sesión con tu cuenta de Google para acceder a tu perfil.</p>
+    <button (click)="handleLogin()">Iniciar Sesión con Google</button>
+    <button class="close-button" (click)="showLoginModal = false">×</button>
+  </div>
+</div>

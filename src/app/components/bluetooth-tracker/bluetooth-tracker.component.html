@@ -1,0 +1,9 @@
+<div class="tracker">
+    <h1>Localizador BLE para Mascotas</h1>
+  
+    <button *ngIf="!isConnected" (click)="connectToDevice()">Conectar a dispositivo</button>
+    <button *ngIf="isConnected" (click)="disconnect()">Desconectar</button>
+  
+    <p *ngIf="isConnected">¡Dispositivo conectado! Puedes empezar a localizarlo.</p>
+  </div>
+  

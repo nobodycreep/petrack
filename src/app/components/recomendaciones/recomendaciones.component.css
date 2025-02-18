@@ -1,0 +1,98 @@
+/* Contenedor general para las recomendaciones */
+.recomendaciones-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #121212;  /* Fondo negro */
+  min-height: 100vh;  /* Ocupa toda la altura de la pantalla */
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Estilo para las tarjetas de recomendación */
+.recomendacion-card {
+  width: 100%;
+  max-width: 700px;
+  background-color: #1c1c1c;  /* Fondo gris oscuro para las tarjetas */
+  color: #ffffff;  /* Texto blanco */
+  border-radius: 12px;  /* Bordes redondeados */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);  /* Sombra suave */
+  margin-bottom: 20px;  /* Espacio entre las tarjetas */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;  /* Animaciones suaves */
+}
+
+/* Animación para las tarjetas */
+.recomendacion-card:hover {
+  transform: translateY(-10px);  /* Eleva la tarjeta al pasar el ratón */
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);  /* Aumenta la sombra en hover */
+}
+
+/* Títulos dentro de las tarjetas */
+.recomendacion-card mat-card-header {
+  background-color: #333333;  /* Fondo gris oscuro para el header */
+  border-radius: 12px 12px 0 0;  /* Bordes redondeados solo en la parte superior */
+}
+
+.recomendacion-card mat-card-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #fafcff;  /* Blanco suave para el título */
+  text-align: center;
+  padding: 10px;
+}
+
+/* Contenido de la tarjeta */
+.recomendacion-card mat-card-content {
+  font-size: 16px;
+  color: #ffffff;  /* Texto blanco */
+  padding: 20px;
+  text-align: justify;  /* Alinear el texto */
+}
+
+/* Estilo para el botón de acción (si fuera necesario) */
+button {
+  background-color: #4c77af;  /* Azul oscuro para el botón */
+  color: #FFFFFF;
+  font-size: 16px;
+  padding: 12px 24px;
+  border-radius: 30px;
+  border: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  margin-top: 20px;
+  width: 100%;
+}
+
+/* Hover para el botón */
+button:hover {
+  background-color: #333333;  /* Fondo gris oscuro al hacer hover */
+  transform: translateY(-2px);  /* Leve elevación al hacer hover */
+}
+
+/* Media Query para pantallas pequeñas */
+@media (max-width: 768px) {
+  .recomendaciones-container {
+    padding: 15px;
+  }
+
+  .recomendacion-card {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .recomendacion-card mat-card-title {
+    font-size: 20px;  /* Reducir el tamaño del título en móviles */
+  }
+
+  .recomendacion-card mat-card-content {
+    font-size: 14px;  /* Reducir el tamaño del contenido en móviles */
+  }
+
+  button {
+    width: 100%;  /* Hacer que el botón ocupe todo el ancho en móviles */
+    font-size: 18px;
+  }
+}

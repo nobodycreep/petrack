@@ -1,0 +1,74 @@
+<div class="perfil-container">
+  <div class="perfil-card">
+    <div class="perfil-header">
+      <img [src]="mascota.foto" alt="Foto de la mascota" class="mascota-img" />  
+    </div>
+
+    <div class="perfil-body">
+
+      <h2 class="nombre" *ngIf="!editMode">{{ mascota.nombre }}</h2>
+      <p *ngIf="editMode"><strong>Nombre</strong></p>
+      <input
+        *ngIf="editMode"
+        type="text"
+        [(ngModel)]="mascota.nombre"
+        placeholder="Nombre"
+        class="input-edit"
+      />
+      <p *ngIf="!editMode"><strong>Edad:</strong> {{ mascota.edad }} años</p>
+      <p *ngIf="editMode"><strong>Edad</strong></p>
+      <input
+        *ngIf="editMode"
+        type="number"
+        [(ngModel)]="mascota.edad"
+        placeholder="Edad"
+        class="input-edit"
+      />
+
+      <p *ngIf="!editMode"><strong>Raza:</strong> {{ mascota.raza }}</p>
+      <p *ngIf="editMode"><strong>Raza</strong></p>
+      <input
+        *ngIf="editMode"
+        type="text"
+        [(ngModel)]="mascota.raza"
+        placeholder="Raza"
+        class="input-edit"
+      />
+
+      <p *ngIf="!editMode"><strong>Peso:</strong> {{ mascota.peso }} kg</p>
+      <p *ngIf="editMode"><strong>Peso</strong></p>
+      <input
+        *ngIf="editMode"
+        type="number"
+        [(ngModel)]="mascota.peso"
+        placeholder="Peso"
+        class="input-edit"
+      />
+
+      <p *ngIf="!editMode"><strong>Salud:</strong> {{ mascota.salud }}</p>
+      <p *ngIf="editMode"><strong>Salud</strong></p>
+      <input
+        *ngIf="editMode"
+        type="text"
+        [(ngModel)]="mascota.salud"
+        placeholder="Salud"
+        class="input-edit"
+      />
+
+      <p *ngIf="!editMode"><strong>Fecha de nacimiento:</strong> {{ mascota.nacimiento }}</p>
+      <p *ngIf="editMode"><strong>Fecha de nacimiento</strong></p>
+      <input
+        *ngIf="editMode"
+        type="text"
+        [(ngModel)]="mascota.nacimiento"
+        placeholder="Fecha de nacimiento"
+        class="input-edit"
+      />
+    </div>
+
+    <div class="perfil-actions">
+      <button *ngIf="!editMode" (click)="editarPerfil()">Editar Perfil</button>
+      <button *ngIf="editMode" (click)="guardarPerfil()">Guardar Cambios</button>
+    </div>
+  </div>
+</div>
