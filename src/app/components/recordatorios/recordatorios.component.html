@@ -1,14 +1,11 @@
-<!-- recordatorios.component.html -->
 <div class="recordatorios-container">
-  <h2 class="title">Lista de Recordatorios</h2>
+  <h2 class="title">📌 Recordatorios Pendientes</h2>
 
-  <!-- Mostrar lista de recordatorios -->
-  <div *ngFor="let recordatorio of recordatorios; let i = index" class="recordatorio-card">
+  <div *ngFor="let recordatorio of pendientes; let i = index" class="recordatorio-card">
     <mat-card>
       <mat-card-header>
         <mat-card-title>
-          <!-- Si estamos editando este recordatorio, mostrar el campo de entrada -->
-          <ng-container *ngIf="recordatorioEditando === i; else mostrarTitulo">
+          <ng-container *ngIf="recordatorioEditando === recordatorios.indexOf(recordatorio); else mostrarTitulo">
             <mat-form-field>
               <input matInput [(ngModel)]="recordatorio.titulo" placeholder="Nuevo título">
             </mat-form-field>
@@ -18,8 +15,7 @@
       </mat-card-header>
       <mat-card-content>
         <p>
-          <!-- Si estamos editando este recordatorio, mostrar el campo de entrada para la descripción -->
-          <ng-container *ngIf="recordatorioEditando === i; else mostrarDescripcion">
+          <ng-container *ngIf="recordatorioEditando === recordatorios.indexOf(recordatorio); else mostrarDescripcion">
             <mat-form-field>
               <textarea matInput [(ngModel)]="recordatorio.descripcion" placeholder="Nueva descripción"></textarea>
             </mat-form-field>
@@ -28,36 +24,50 @@
         </p>
       </mat-card-content>
       <mat-card-actions>
-        <!-- Botón para marcar como completado -->
-        <button mat-raised-button color="primary" (click)="marcarComoRealizado(i)" [disabled]="recordatorio.completado">
-          <mat-icon *ngIf="!recordatorio.completado">check</mat-icon>
-          <mat-icon *ngIf="recordatorio.completado">check_circle</mat-icon>
-          {{ recordatorio.completado ? 'Completado' : '' }}
+        <button mat-raised-button color="primary" (click)="marcarComoRealizado(i)">
+          <mat-icon>check</mat-icon> Completar
         </button>
-
-        <!-- Botón para eliminar -->
-        <button mat-raised-button color="warn" (click)="eliminarRecordatorio(i)">
-          Eliminar
-        </button>
-
-        <!-- Botón para editar el recordatorio -->
-        <button *ngIf="recordatorioEditando !== i" mat-raised-button color="accent" (click)="editarRecordatorio(i)">
+        <button mat-raised-button color="warn" (click)="eliminarRecordatorio(i)">Eliminar</button>
+        <button *ngIf="recordatorioEditando !== recordatorios.indexOf(recordatorio)" mat-raised-button color="accent" (click)="editarRecordatorio(i)">
           Editar
         </button>
-
-        <!-- Botones de guardar y cancelar cuando se edita -->
-        <ng-container *ngIf="recordatorioEditando === i">
-          <button mat-raised-button color="primary" (click)="guardarEdicion(i, recordatorio.titulo, recordatorio.descripcion)">
-            Guardar
-          </button>
-          <button mat-raised-button color="warn" (click)="cancelarEdicion()">
-            Cancelar
-          </button>
+        <ng-container *ngIf="recordatorioEditando === recordatorios.indexOf(recordatorio)">
+          <button mat-raised-button color="primary" (click)="guardarEdicion(i, recordatorio.titulo, recordatorio.descripcion)">Guardar</button>
+          <button mat-raised-button color="warn" (click)="cancelarEdicion()">Cancelar</button>
         </ng-container>
       </mat-card-actions>
     </mat-card>
   </div>
 
-  <!-- Botón para agregar un nuevo recordatorio -->
-  <button mat-raised-button color="primary" (click)="agregarRecordatorio()">Agregar Recordatorio</button>
+  <button mat-raised-button color="primary" (click)="agregarRecordatorio()">➕ Agregar Recordatorio</button>
+
+  <h2 class="title completados-title">✅ Completados</h2>
+
+  <div *ngIf="completados.length === 0">
+    <p>No hay recordatorios completados todavía.</p>
+  </div>
+
+  <div *ngFor="let recordatorio of completados; let i = index" class="recordatorio-card completado">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon color="primary">check_circle</mat-icon>
+          {{ recordatorio.titulo }}
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ recordatorio.descripcion }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="warn" (click)="eliminarRecordatorio(i, true)">Eliminar</button>
+        <button *ngIf="recordatorioEditando !== recordatorios.indexOf(recordatorio)" mat-raised-button color="accent" (click)="editarRecordatorio(i, true)">
+          Editar
+        </button>
+        <ng-container *ngIf="recordatorioEditando === recordatorios.indexOf(recordatorio)">
+          <button mat-raised-button color="primary" (click)="guardarEdicion(i, recordatorio.titulo, recordatorio.descripcion)">Guardar</button>
+          <button mat-raised-button color="warn" (click)="cancelarEdicion()">Cancelar</button>
+        </ng-container>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>

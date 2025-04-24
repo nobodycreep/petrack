@@ -1,7 +1,7 @@
 <div class="perfil-container">
   <div class="perfil-card">
     <div class="perfil-header">
-      <img [src]="mascota.foto" alt="Foto de la mascota" class="mascota-img" />  
+      <img [src]="mascota.foto" alt="Foto de la mascota" class="mascota-img" />
     </div>
 
     <div class="perfil-body">
@@ -14,7 +14,10 @@
         [(ngModel)]="mascota.nombre"
         placeholder="Nombre"
         class="input-edit"
+        pattern="[A-Za-z ]+" 
+        title="Solo se permiten letras y espacios"
       />
+
       <p *ngIf="!editMode"><strong>Edad:</strong> {{ mascota.edad }} años</p>
       <p *ngIf="editMode"><strong>Edad</strong></p>
       <input
@@ -23,6 +26,8 @@
         [(ngModel)]="mascota.edad"
         placeholder="Edad"
         class="input-edit"
+        min="0"
+        max="30"
       />
 
       <p *ngIf="!editMode"><strong>Raza:</strong> {{ mascota.raza }}</p>
@@ -37,31 +42,26 @@
 
       <p *ngIf="!editMode"><strong>Peso:</strong> {{ mascota.peso }} kg</p>
       <p *ngIf="editMode"><strong>Peso</strong></p>
-      <input
-        *ngIf="editMode"
-        type="number"
-        [(ngModel)]="mascota.peso"
-        placeholder="Peso"
-        class="input-edit"
-      />
+      <div *ngIf="editMode" class="input-group">
+        <input
+          *ngIf="editMode"
+          type="number"
+          [(ngModel)]="mascota.peso"
+          placeholder="Peso"
+          class="input-edit"
+          min="0"
+        />
+    
+      </div>
 
-      <p *ngIf="!editMode"><strong>Salud:</strong> {{ mascota.salud }}</p>
-      <p *ngIf="editMode"><strong>Salud</strong></p>
-      <input
-        *ngIf="editMode"
-        type="text"
-        [(ngModel)]="mascota.salud"
-        placeholder="Salud"
-        class="input-edit"
-      />
+     
 
       <p *ngIf="!editMode"><strong>Fecha de nacimiento:</strong> {{ mascota.nacimiento }}</p>
       <p *ngIf="editMode"><strong>Fecha de nacimiento</strong></p>
       <input
         *ngIf="editMode"
-        type="text"
+        type="date"
         [(ngModel)]="mascota.nacimiento"
-        placeholder="Fecha de nacimiento"
         class="input-edit"
       />
     </div>

@@ -1,18 +1,25 @@
 <div class="container">
+  <!-- Sección de inicio de sesión -->
   <div *ngIf="!user" class="login-container">
-    <button (click)="showLoginModal = true">Login</button>
+    <h1>INICIO DE SESIÓN CON TU CUENTA</h1>
+    <button type="button" (click)="showLoginModal = true" aria-label="Abrir el modal de inicio de sesión">Login</button>
   </div>
 
+  <!-- Tarjeta de perfil -->
   <div *ngIf="user" class="profile-card">
     <div class="profile-header">
       <div class="avatar">
-        <img [src]="user.photoURL || 'assets/default-avatar.png'" [alt]="user.displayName || 'Usuario'">
+        <img 
+          [src]="user.photoURL || 'assets/default-avatar.png'" 
+          [alt]="user.displayName || 'Imagen de perfil del usuario'">
       </div>
       <div class="user-info">
-        <h2>{{profile.name}}</h2>
-        <p>{{user.email}}</p>
+        <h2>{{ profile.name }}</h2>
+        <p>{{ user.email }}</p>
       </div>
     </div>
+
+    <!-- Contenido del perfil -->
     <div class="profile-content">
       <div *ngIf="isEditing">
         <div class="form-group">
@@ -26,22 +33,24 @@
       </div>
       <div *ngIf="!isEditing">
         <h3>Biografía</h3>
-        <p>{{profile.bio || 'Aún no hay biografía.'}}</p>
+        <p>{{ profile.bio || 'Aún no hay biografía.' }}</p>
       </div>
     </div>
+
+    <!-- Botones de acciones -->
     <div class="profile-footer">
-      <button *ngIf="isEditing" (click)="handleSave()">Guardar</button>
-      <button *ngIf="!isEditing" (click)="isEditing = true">Editar Perfil</button>
-      <button (click)="handleLogout()">Cerrar Sesión</button>
+      <button *ngIf="isEditing" type="button" (click)="handleSave()">Guardar</button>
+      <button *ngIf="!isEditing" type="button" (click)="isEditing = true">Editar Perfil</button>
+      <button type="button" (click)="handleLogout()">Cerrar Sesión</button>
     </div>
   </div>
 </div>
 
+<!-- Modal de inicio de sesión -->
 <div *ngIf="showLoginModal" class="modal">
   <div class="modal-content">
-    <h2>Iniciar Sesión en tu Cuenta</h2>
-    <p>Inicia sesión con tu cuenta de Google para acceder a tu perfil.</p>
-    <button (click)="handleLogin()">Iniciar Sesión con Google</button>
-    <button class="close-button" (click)="showLoginModal = false">×</button>
+    <h2>ACCEDE</h2>
+    <button type="button" (click)="handleLogin()">Iniciar Sesión con Google</button>
+    <button type="button" class="close-button" (click)="showLoginModal = false" aria-label="Cerrar el modal">×</button>
   </div>
 </div>

@@ -1,12 +1,11 @@
 <!-- recomendaciones.component.html -->
 <div class="recomendaciones-container">
-    <mat-card *ngFor="let recomendacion of recomendaciones" class="recomendacion-card">
-      <mat-card-header>
-        <mat-card-title>{{ recomendacion.titulo }}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <p>{{ recomendacion.descripcion }}</p>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  
+  <mat-card *ngFor="let recomendacion of recomendaciones" class="recomendacion-card">
+    <mat-card-header>
+      <mat-card-title>{{ recomendacion.titulo }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ recomendacion.descripcion }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>

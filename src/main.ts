@@ -14,6 +14,6 @@ bootstrapApplication(AppComponent, {
       { path: 'bluetooth-tracker', loadComponent: () => import('./app/components/bluetooth-tracker/bluetooth-tracker.component').then(m => m.BluetoothTrackerComponent) },
       { path: 'usuario', loadComponent: () => import('./app/components/usuario/usuario.component').then(m => m.UsuarioComponent) }
     ]),
-    provideAnimationsAsync(), provideAnimationsAsync(),
+    provideAnimationsAsync(), provideAnimationsAsync(), provideAnimationsAsync(),
   ],
 }).catch(err => console.error(err));
