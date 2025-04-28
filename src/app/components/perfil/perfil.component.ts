@@ -1,21 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { initializeApp } from "firebase/app";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
-
-const environment = {
-  production: false,
-  firebaseConfig: {
-    apiKey: "AIzaSyAPa8kHSEk8SXjqjBfaRQ5zDPTv6yxBB0I",
-    authDomain: "petrack-7f8d4.firebaseapp.com",
-    projectId: "petrack-7f8d4",
-    storageBucket: "petrack-7f8d4.appspot.com",
-    messagingSenderId: "392588347137",
-    appId: "1:392588347137:web:65ab15a1f7f48c92336660",
-    measurementId: "G-Y6TF6TB2HJ"
-  }
-};
+import { MascotaService } from '../../services/mascota.service';
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 @Component({
   selector: 'app-perfil',
@@ -25,7 +12,6 @@ const environment = {
   imports: [CommonModule, FormsModule],
 })
 export class PerfilComponent implements OnInit {
-  
   mascota = {
     nombre: 'Nueva Mascota',
     foto: 'https://img.freepik.com/vector-premium/ilustracion-silueta-cabeza-plana-perro_972258-1044.jpg',
@@ -37,33 +23,14 @@ export class PerfilComponent implements OnInit {
   };
 
   editMode = false;
-  db: any;
   mascotaId = 'mascota1';
 
-  constructor() {
-    const app = initializeApp(environment.firebaseConfig);
-    this.db = getFirestore(app);
-  }
+  constructor(private mascotaService: MascotaService) {}
 
-  ngOnInit() {
-    this.inicializarPerfilMascota();
-  }
-
-  async inicializarPerfilMascota() {
-    const docRef = doc(this.db, "mascotas", this.mascotaId);
-    const docSnap = await getDoc(docRef);
-
-    if (!docSnap.exists()) {
-      await this.crearPerfilMascota();
-    } else {
-      this.mascota = docSnap.data() as typeof this.mascota;
-    }
-  }
-
-  async crearPerfilMascota() {
-    const docRef = doc(this.db, "mascotas", this.mascotaId);
-    await setDoc(docRef, this.mascota);
-    console.log("Perfil de mascota creado");
+  async ngOnInit() {
+    const data = await this.mascotaService.obtenerMascota(this.mascotaId);
+    if (data) this.mascota = data;
+    else await this.mascotaService.guardarMascota(this.mascotaId, this.mascota);
   }
 
   editarPerfil() {
@@ -72,8 +39,33 @@ export class PerfilComponent implements OnInit {
 
   async guardarPerfil() {
     this.editMode = false;
-    const docRef = doc(this.db, "mascotas", this.mascotaId);
-    await setDoc(docRef, this.mascota);
-    console.log("Perfil de mascota actualizado");
+    await this.mascotaService.guardarMascota(this.mascotaId, this.mascota);
+    console.log('Perfil actualizado');
+  }
+
+  async subirImagenMascota(event: any) {
+    const archivo = event.target.files[0];
+    if (!archivo) return;
+  
+    const storage = getStorage();
+    const ruta = `mascotas/${this.mascotaId}/foto.jpg`;
+    const referencia = ref(storage, ruta);
+  
+    try {
+      // Subir imagen
+      await uploadBytes(referencia, archivo);
+      const url = await getDownloadURL(referencia);
+  
+      // Actualizar foto localmente
+      this.mascota.foto = url;
+  
+      // Guardar también en Firestore
+      await this.mascotaService.guardarMascota(this.mascotaId, this.mascota);
+  
+      console.log('Imagen subida y perfil actualizado con la nueva foto:', url);
+    } catch (error) {
+      console.error('Error al subir imagen:', error);
+    }
   }
 }
+

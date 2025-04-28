@@ -1,74 +1,100 @@
 <div class="perfil-container">
   <div class="perfil-card">
+
+    <!-- Imagen de la mascota -->
     <div class="perfil-header">
       <img [src]="mascota.foto" alt="Foto de la mascota" class="mascota-img" />
+
+      <!-- Input de imagen solo en modo edición -->
+      <div *ngIf="editMode" class="upload-img">
+        <label for="fotoInput"><strong>Cambiar foto</strong></label>
+        <input id="fotoInput" type="file" (change)="subirImagenMascota($event)" />
+      </div>
     </div>
 
+    <!-- Contenido del perfil -->
     <div class="perfil-body">
-
-      <h2 class="nombre" *ngIf="!editMode">{{ mascota.nombre }}</h2>
-      <p *ngIf="editMode"><strong>Nombre</strong></p>
-      <input
-        *ngIf="editMode"
-        type="text"
-        [(ngModel)]="mascota.nombre"
-        placeholder="Nombre"
-        class="input-edit"
-        pattern="[A-Za-z ]+" 
-        title="Solo se permiten letras y espacios"
-      />
-
-      <p *ngIf="!editMode"><strong>Edad:</strong> {{ mascota.edad }} años</p>
-      <p *ngIf="editMode"><strong>Edad</strong></p>
-      <input
-        *ngIf="editMode"
-        type="number"
-        [(ngModel)]="mascota.edad"
-        placeholder="Edad"
-        class="input-edit"
-        min="0"
-        max="30"
-      />
-
-      <p *ngIf="!editMode"><strong>Raza:</strong> {{ mascota.raza }}</p>
-      <p *ngIf="editMode"><strong>Raza</strong></p>
-      <input
-        *ngIf="editMode"
-        type="text"
-        [(ngModel)]="mascota.raza"
-        placeholder="Raza"
-        class="input-edit"
-      />
-
-      <p *ngIf="!editMode"><strong>Peso:</strong> {{ mascota.peso }} kg</p>
-      <p *ngIf="editMode"><strong>Peso</strong></p>
-      <div *ngIf="editMode" class="input-group">
+      
+      <!-- Nombre -->
+      <div *ngIf="!editMode">
+        <h2 class="nombre">{{ mascota.nombre }}</h2>
+      </div>
+      <div *ngIf="editMode">
+        <label><strong>Nombre</strong></label>
         <input
-          *ngIf="editMode"
+          type="text"
+          [(ngModel)]="mascota.nombre"
+          placeholder="Nombre"
+          class="input-edit"
+          pattern="[A-Za-z ]+"
+          title="Solo se permiten letras y espacios"
+        />
+      </div>
+
+      <!-- Edad -->
+      <div *ngIf="!editMode">
+        <p><strong>Edad:</strong> {{ mascota.edad }} años</p>
+      </div>
+      <div *ngIf="editMode">
+        <label><strong>Edad</strong></label>
+        <input
+          type="number"
+          [(ngModel)]="mascota.edad"
+          placeholder="Edad"
+          class="input-edit"
+          min="0"
+          max="30"
+        />
+      </div>
+
+      <!-- Raza -->
+      <div *ngIf="!editMode">
+        <p><strong>Raza:</strong> {{ mascota.raza }}</p>
+      </div>
+      <div *ngIf="editMode">
+        <label><strong>Raza</strong></label>
+        <input
+          type="text"
+          [(ngModel)]="mascota.raza"
+          placeholder="Raza"
+          class="input-edit"
+        />
+      </div>
+
+      <!-- Peso -->
+      <div *ngIf="!editMode">
+        <p><strong>Peso:</strong> {{ mascota.peso }} kg</p>
+      </div>
+      <div *ngIf="editMode">
+        <label><strong>Peso</strong></label>
+        <input
           type="number"
           [(ngModel)]="mascota.peso"
           placeholder="Peso"
           class="input-edit"
           min="0"
         />
-    
       </div>
 
-     
-
-      <p *ngIf="!editMode"><strong>Fecha de nacimiento:</strong> {{ mascota.nacimiento }}</p>
-      <p *ngIf="editMode"><strong>Fecha de nacimiento</strong></p>
-      <input
-        *ngIf="editMode"
-        type="date"
-        [(ngModel)]="mascota.nacimiento"
-        class="input-edit"
-      />
+      <!-- Fecha de nacimiento -->
+      <div *ngIf="!editMode">
+        <p><strong>Fecha de nacimiento:</strong> {{ mascota.nacimiento }}</p>
+      </div>
+      <div *ngIf="editMode">
+        <label><strong>Fecha de nacimiento</strong></label>
+        <input
+          type="date"
+          [(ngModel)]="mascota.nacimiento"
+          class="input-edit"
+        />
+      </div>
     </div>
 
+    <!-- Botones de acción -->
     <div class="perfil-actions">
       <button *ngIf="!editMode" (click)="editarPerfil()">Editar Perfil</button>
       <button *ngIf="editMode" (click)="guardarPerfil()">Guardar Cambios</button>
     </div>
+
   </div>
 </div>
