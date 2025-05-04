@@ -1,1 +1,45 @@
-<div #map style="height: 500px; width: 100%;"></div>
+<div class="map-container">
+    <div #map class="map"></div>
+    
+    <!-- Botón de localización -->
+    <div class="locate-button-container">
+      <button 
+        class="locate-button" 
+        [class.active]="isTracking"
+        (click)="toggleTracking()">
+        <div class="button-content">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <circle cx="12" cy="12" r="1"></circle>
+            <line x1="12" y1="2" x2="12" y2="4"></line>
+            <line x1="12" y1="20" x2="12" y2="22"></line>
+            <line x1="2" y1="12" x2="4" y2="12"></line>
+            <line x1="20" y1="12" x2="22" y2="12"></line>
+          </svg>
+          <span>{{ isTracking ? 'Detener localización' : 'Localizar' }}</span>
+        </div>
+      </button>
+    </div>
+    
+    <!-- Información de posición -->
+    <div class="position-info" *ngIf="currentPosition">
+      <h3>Posición del dispositivo</h3>
+      <div class="coordinates">
+        <div>Latitud: {{ currentPosition.latitude | number:'1.6-6' }}</div>
+        <div>Longitud: {{ currentPosition.longitude | number:'1.6-6' }}</div>
+        <div *ngIf="currentPosition.timestamp">
+          Actualizado: {{ currentPosition.timestamp | date:'HH:mm:ss' }}
+        </div>
+      </div>
+      
+      <div class="tracking-status" [class.active]="isTracking">
+        <span class="status-dot"></span>
+        {{ isTracking ? 'Seguimiento activo' : 'Seguimiento pausado' }}
+      </div>
+    </div>
+    
+    <!-- Mensaje de error -->
+    <div class="no-data" *ngIf="locationError">
+      {{ locationError }}
+    </div>
+  </div>

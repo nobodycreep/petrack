@@ -1,84 +1,69 @@
-/* Estilo básico para la barra de navegación */
-nav {
-  background-color: #333333;  /* Gris oscuro */
-  padding: 15px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  /* Sombra suave */
+/* Título principal de la app */
+.app-title {
+  background-color: #1c1c1c;  /* mismo color que tus tarjetas */
+  color: #80cbc4;             /* verde suave */
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 2.5rem 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  border-bottom: 2px solid #00796b;
 }
 
+/* Barra de navegación */
+nav {
+  background-color: #121212;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  gap: 1rem;
+  border-bottom: 1px solid #00796b;
+}
+
+/* Enlaces del nav */
 nav a {
-  color: #E0E0E0;  /* Gris claro */
   text-decoration: none;
-  padding: 12px 20px;
-  font-size: 18px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  color: #e0e0e0;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 nav a:hover {
-  background-color: #444444;  /* Gris medio */
-  color: #FFFFFF;  /* Blanco al hacer hover */
-  border-radius: 5px;
+  background-color: #1c1c1c;
+  color: #80cbc4;
 }
 
-nav .active {
-  background-color: #5A5A5A;  /* Gris más claro */
-  color: white;
-  border-radius: 5px;
+nav a.active {
+  background-color: #00796b;
+  color: #fff;
 }
 
-nav .menu-icon {
+/* Menú hamburguesa */
+.menu-icon {
   display: none;
-  font-size: 30px;
-  color: #E0E0E0;
+  font-size: 1.8rem;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  color: #80cbc4;
+  margin-right: auto;
 }
 
-/* Media Query para pantallas pequeñas */
+/* Responsive: modo columna en móviles */
 @media (max-width: 768px) {
   nav {
     flex-direction: column;
     align-items: flex-start;
-    padding: 15px 20px;
-    box-shadow: none;  /* Elimina la sombra en pantallas pequeñas */
   }
 
-  /* Ocultamos los enlaces por defecto */
+  .menu-icon {
+    display: block;
+  }
+
   nav a {
-    display: none;
     width: 100%;
-    text-align: left;
-    padding: 15px;
-    font-size: 18px;
-    border-top: 1px solid #444444;
-  }
-
-  nav a:first-child {
-    border-top: none;  /* El primer enlace no tiene borde superior */
-  }
-
-  /* Mostrar el icono de menú en pantallas pequeñas */
-  nav .menu-icon {
-    display: block;
-  }
-
-  /* Cuando el menú tiene la clase 'active', mostramos los enlaces */
-  nav.active a {
-    display: block;
-  }
-
-  /* Rotación del icono del menú */
-  nav .menu-icon.active {
-    transform: rotate(90deg);
-  }
-
-  /* Agregar sombra cuando el menú está desplegado */
-  nav.active {
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
+    padding: 1rem 0;
   }
 }

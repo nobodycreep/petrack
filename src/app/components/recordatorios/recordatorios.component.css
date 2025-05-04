@@ -1,108 +1,94 @@
-/* Estilos generales para la lista de recordatorios */
 .recordatorios-container {
-    padding: 20px;
-    font-family: 'Roboto', sans-serif;
-    background-color: #121212;  /* Fondo oscuro para el contenedor */
-  }
-  
+  padding: 20px;
+  font-family: 'Roboto', sans-serif;
+  background-color: #121212;
+}
+
+.title {
+  font-size: 2rem;
+  color: #80cbc4;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.recordatorio-card {
+  margin-bottom: 20px;
+}
+
+mat-card {
+  background-color: #1c1c1c;
+  color: #fafcff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+mat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+mat-card-header {
+  font-weight: bold;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+mat-card-content {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+button {
+  margin-top: 10px;
+  font-size: 14px;
+  border-radius: 30px;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.no-completados {
+  text-align: center;
+  color: #b0b0b0;
+}
+
+@media (max-width: 768px) {
   .title {
-    font-size: 2rem;
-    color: #fafcff;
-    text-align: center;
-    margin-bottom: 20px;
+    font-size: 1.5rem;
   }
-  
-  /* Estilo para los cards de recordatorios */
-  .recordatorio-card {
-    margin-bottom: 20px;
-  }
-  
+
   mat-card {
-    background-color: #1c1c1c; /* Fondo oscuro para el card */
-    color: #fafcff; /* Texto claro */
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 15px;
   }
-  
-  /* Animación de los cards */
-  mat-card:hover {
-    transform: translateY(-5px);  /* Elevación ligera al pasar el ratón */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-  }
-  
-  /* Títulos dentro de los cards */
+
   mat-card-header {
-    font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
-  
+
   mat-card-content {
-    font-size: 1rem;
-    margin-bottom: 10px;
+    font-size: 0.9rem;
   }
-  
+
   button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    font-size: 14px;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    width: 100%;
+    font-size: 12px;
+    padding: 8px 16px;
   }
-  
-  button:hover {
-    opacity: 0.9;
-    transform: translateY(-2px);
-  }
-  
-  /* Botón de "Realizado" */
-  button.mat-raised-button[ng-reflect-color='primary'] {
-    background-color: #4caf50;
-    color: white;
-  }
-  
-  /* Botón de "Eliminar" */
-  button.mat-raised-button[ng-reflect-color='warn'] {
-    background-color: #f44336;
-    color: white;
-  }
-  
-  /* Media Query para pantallas pequeñas */
-  @media (max-width: 768px) {
-    .recordatorios-container {
-      padding: 15px;  /* Reducir padding en pantallas más pequeñas */
-    }
-  
-    .title {
-      font-size: 1.5rem;  /* Reducir tamaño del título en móviles */
-    }
-  
-    mat-card {
-      padding: 15px;
-    }
-  
-    mat-card-header {
-      font-size: 1.1rem;  /* Reducir tamaño del título dentro del card */
-    }
-  
-    mat-card-content {
-      font-size: 0.9rem;  /* Ajustar tamaño de la descripción */
-    }
-  
-    button {
-      font-size: 12px;  /* Reducir tamaño de los botones */
-      padding: 8px 16px;  /* Ajustar el padding de los botones */
-    }
-  
-    button.mat-raised-button[ng-reflect-color='primary'] {
-      background-color: #388e3c;
-    }
-  
-    button.mat-raised-button[ng-reflect-color='warn'] {
-      background-color: #d32f2f;
-    }
-  }
-  
+  button.mat-raised-button[color='primary'] {
+  background-color: #ffffff; /* Fondo blanco */
+  color: #00796b; /* Texto de color verde (puedes cambiarlo si lo prefieres) */
+  border: 1px solid #00796b; /* Borde verde */
+}
+
+button.mat-raised-button[color='primary']:hover {
+  background-color: #80cbc4; /* Color de fondo al hacer hover */
+  color: white; /* Texto blanco al hacer hover */
+}
+
+}

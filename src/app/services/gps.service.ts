@@ -2,8 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Database, ref, onValue } from '@angular/fire/database';
 import { Auth } from '@angular/fire/auth';
-import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,22 +15,22 @@ export class GpsService {
 
   getLivePosition(): Observable<any> {
     return new Observable(observer => {
-      const user = this.auth.currentUser;
-      if (!user) {
-        observer.next(null);
-        observer.complete();
-        return;
-      }
-
-      const positionRef = ref(this.db, `gpsData/${user.uid}`);
+      // Referencia directa al nodo 'datos' donde el ESP32 escribe
+      const positionRef = ref(this.db, 'datos');
+      
       onValue(positionRef, (snapshot) => {
         const data = snapshot.val();
-        observer.next({
-          latitude: data?.latitude || data?.lat,
-          longitude: data?.longitude || data?.lng,
-          timestamp: data?.timestamp
-        });
+        if (data) {
+          observer.next({
+            latitude: data.latitud, // El ESP32 usa 'latitud'
+            longitude: data.longitud, // El ESP32 usa 'longitud'
+            timestamp: data.timestamp || Date.now() // Si existe timestamp lo usa, sino usa la hora actual
+          });
+        } else {
+          observer.next(null);
+        }
       }, (error) => {
+        console.error('Error al leer datos GPS:', error);
         observer.error(error);
       });
     });
