@@ -23,4 +23,18 @@ export class AppComponent {
       nav?.classList.remove('active');  // Remover clase 'active' al cerrar
     }
   }
+
+  closeMenu() {
+    this.menuOpen = false;
+    this.updateMenuState();
+  }
+
+  private updateMenuState() {
+    const nav = document.querySelector('nav');
+    if (this.menuOpen) {
+      nav?.classList.add('active');
+    } else {
+      nav?.classList.remove('active');
+    }
+  }
 }

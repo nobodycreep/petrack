@@ -1,17 +1,17 @@
 <div class="container">
-  <!-- Sección de inicio de sesión -->
+  <!-- LOGIN -->
   <div *ngIf="!user" class="login-container">
     <h1>INICIO DE SESIÓN CON TU CUENTA</h1>
-    <button type="button" (click)="showLoginModal = true" aria-label="Abrir el modal de inicio de sesión">Login</button>
+    <button (click)="showLoginModal = true" aria-label="Abrir el modal de inicio de sesión">Login</button>
   </div>
 
-  <!-- Tarjeta de perfil -->
-  <div *ngIf="user" class="profile-card">
+  <!-- PERFIL -->
+  <div *ngIf="user" class="profile-card" role="region" aria-label="Perfil del usuario">
     <div class="profile-header">
       <div class="avatar">
         <img 
           [src]="user.photoURL || 'assets/default-avatar.png'" 
-          [alt]="user.displayName || 'Imagen de perfil del usuario'">
+          [alt]="user.displayName || 'Foto de usuario'" />
       </div>
       <div class="user-info">
         <h2>{{ profile.name }}</h2>
@@ -19,38 +19,45 @@
       </div>
     </div>
 
-    <!-- Contenido del perfil -->
+    <!-- EDITAR PERFIL -->
     <div class="profile-content">
       <div *ngIf="isEditing">
         <div class="form-group">
           <label for="name">Nombre</label>
-          <input id="name" [(ngModel)]="profile.name" placeholder="Tu nombre">
+          <input id="name" [(ngModel)]="profile.name" placeholder="Tu nombre" />
         </div>
         <div class="form-group">
           <label for="bio">Biografía</label>
-          <input id="bio" [(ngModel)]="profile.bio" placeholder="Tu biografía">
+          <input id="bio" [(ngModel)]="profile.bio" placeholder="Tu biografía" />
         </div>
       </div>
+
+      <!-- MOSTRAR PERFIL -->
       <div *ngIf="!isEditing">
         <h3>Biografía</h3>
         <p>{{ profile.bio || 'Aún no hay biografía.' }}</p>
       </div>
     </div>
 
-    <!-- Botones de acciones -->
+    <!-- BOTONES -->
     <div class="profile-footer">
-      <button *ngIf="isEditing" type="button" (click)="handleSave()">Guardar</button>
-      <button *ngIf="!isEditing" type="button" (click)="isEditing = true">Editar Perfil</button>
-      <button type="button" (click)="handleLogout()">Cerrar Sesión</button>
+      <ng-container *ngIf="isEditing; else normalButtons">
+        <button (click)="handleSave()">Guardar</button>
+        <button (click)="isEditing = false">Cancelar</button>
+      </ng-container>
+      <ng-template #normalButtons>
+        <button (click)="isEditing = true">Editar Perfil</button>
+        <button (click)="handleLogout()">Cerrar Sesión</button>
+      </ng-template>
     </div>
   </div>
 </div>
 
-<!-- Modal de inicio de sesión -->
-<div *ngIf="showLoginModal" class="modal">
+<!-- MODAL -->
+<div *ngIf="showLoginModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal-content">
-    <h2>ACCEDE</h2>
-    <button type="button" (click)="handleLogin()">Iniciar Sesión con Google</button>
-    <button type="button" class="close-button" (click)="showLoginModal = false" aria-label="Cerrar el modal">×</button>
+    <h2 id="modalTitle">ACCEDE</h2>
+    <button (click)="handleLogin()">Iniciar Sesión con Google</button>
+    <button class="close-button" (click)="showLoginModal = false" aria-label="Cerrar el modal">×</button>
   </div>
 </div>

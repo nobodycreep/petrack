@@ -1,45 +1,68 @@
 <div class="map-container">
-    <div #map class="map"></div>
-    
-    <!-- Botón de localización -->
-    <div class="locate-button-container">
-      <button 
-        class="locate-button" 
-        [class.active]="isTracking"
-        (click)="toggleTracking()">
-        <div class="button-content">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <circle cx="12" cy="12" r="1"></circle>
-            <line x1="12" y1="2" x2="12" y2="4"></line>
-            <line x1="12" y1="20" x2="12" y2="22"></line>
-            <line x1="2" y1="12" x2="4" y2="12"></line>
-            <line x1="20" y1="12" x2="22" y2="12"></line>
-          </svg>
-          <span>{{ isTracking ? 'Detener localización' : 'Localizar' }}</span>
-        </div>
-      </button>
+  <div #map class="map"></div>
+  
+  <!-- Botón de localización -->
+  <div class="locate-button-container">
+    <button 
+      class="locate-button" 
+      [class.active]="isTracking"
+      (click)="toggleTracking()">
+      <div class="button-content">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <circle cx="12" cy="12" r="1"></circle>
+          <line x1="12" y1="2" x2="12" y2="4"></line>
+          <line x1="12" y1="20" x2="12" y2="22"></line>
+          <line x1="2" y1="12" x2="4" y2="12"></line>
+          <line x1="20" y1="12" x2="22" y2="12"></line>
+        </svg>
+        <span>{{ isTracking ? 'Detener seguimiento' : 'Iniciar seguimiento' }}</span>
+      </div>
+    </button>
+  </div>
+  
+  <!-- Botón para centrar en la ubicación actual -->
+  <div class="center-button-container">
+    <button class="center-button" (click)="centerOnCurrentLocation()">
+      <div class="button-content">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+        <span>Centrar</span>
+      </div>
+    </button>
+  </div>
+  
+  <!-- Información de posición -->
+  <div class="position-info" *ngIf="currentPosition">
+    <h3>Posición del ESP32</h3>
+    <div class="coordinates">
+      <div>Latitud: {{ currentPosition.latitude | number:'1.6-6' }}</div>
+      <div>Longitud: {{ currentPosition.longitude | number:'1.6-6' }}</div>
+      <div *ngIf="currentPosition.timestamp">
+        Actualizado: {{ currentPosition.timestamp | date:'HH:mm:ss' }}
+      </div>
+      <div *ngIf="currentPosition.accuracy">
+        Precisión: ±{{ currentPosition.accuracy | number:'1.1-1' }} m
+      </div>
     </div>
     
-    <!-- Información de posición -->
-    <div class="position-info" *ngIf="currentPosition">
-      <h3>Posición del dispositivo</h3>
-      <div class="coordinates">
-        <div>Latitud: {{ currentPosition.latitude | number:'1.6-6' }}</div>
-        <div>Longitud: {{ currentPosition.longitude | number:'1.6-6' }}</div>
-        <div *ngIf="currentPosition.timestamp">
-          Actualizado: {{ currentPosition.timestamp | date:'HH:mm:ss' }}
-        </div>
-      </div>
-      
-      <div class="tracking-status" [class.active]="isTracking">
-        <span class="status-dot"></span>
-        {{ isTracking ? 'Seguimiento activo' : 'Seguimiento pausado' }}
-      </div>
-    </div>
-    
-    <!-- Mensaje de error -->
-    <div class="no-data" *ngIf="locationError">
-      {{ locationError }}
+    <div class="tracking-status" [class.active]="isTracking">
+      <span class="status-dot"></span>
+      {{ isTracking ? 'Seguimiento activo' : 'Seguimiento pausado' }}
     </div>
   </div>
+  
+  <!-- Mensaje de error -->
+  <div class="error-message" *ngIf="locationError">
+    <div class="error-content">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+      </svg>
+      <span>{{ locationError }}</span>
+    </div>
+  </div>
+</div>

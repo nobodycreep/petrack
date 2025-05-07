@@ -17,34 +17,29 @@ const firebaseConfig = {
 
 @Component({
   selector: 'app-usuario',
-  imports: [FormsModule, CommonModule],
   standalone: true,
+  imports: [FormsModule, CommonModule],
   templateUrl: './usuario.component.html',
   styleUrls: ['./usuario.component.css']
 })
 export class UsuarioComponent implements OnInit {
   user: User | null = null;
-  profile: { name: string; bio: string } = { name: '', bio: '' };
+  profile = { name: '', bio: '' };
   isEditing = false;
   showLoginModal = false;
 
-  private auth: any;
-  private db: any;
-
-  constructor() {
-    const app = initializeApp(firebaseConfig);
-    this.auth = getAuth(app);
-    this.db = getFirestore(app);
-  }
+  private auth = getAuth(initializeApp(firebaseConfig));
+  private db = getFirestore();
 
   ngOnInit() {
-    this.auth.onAuthStateChanged(async (user: User | null) => {
+    this.auth.onAuthStateChanged(async (user) => {
       this.user = user;
       if (user) {
-        const docRef = doc(this.db, "users", user.uid);
+        const docRef = doc(this.db, 'users', user.uid);
         const docSnap = await getDoc(docRef);
+
         if (docSnap.exists()) {
-          this.profile = docSnap.data() as { name: string, bio: string };
+          this.profile = docSnap.data() as { name: string; bio: string };
         } else {
           this.profile = { name: user.displayName || '', bio: '' };
           await setDoc(docRef, this.profile);
@@ -54,11 +49,12 @@ export class UsuarioComponent implements OnInit {
   }
 
   async handleLogin() {
-    const provider = new GoogleAuthProvider();
     try {
+      const provider = new GoogleAuthProvider();
       await signInWithPopup(this.auth, provider);
-      this.showLoginModal = false } catch (error) {
-      console.error("Error during login:", error);
+      this.showLoginModal = false;
+    } catch (error) {
+      console.error('Error durante el inicio de sesión:', error);
     }
   }
 
@@ -66,11 +62,12 @@ export class UsuarioComponent implements OnInit {
     await this.auth.signOut();
     this.user = null;
     this.profile = { name: '', bio: '' };
+    this.isEditing = false;
   }
 
   async handleSave() {
     if (this.user) {
-      const docRef = doc(this.db, "users", this.user.uid);
+      const docRef = doc(this.db, 'users', this.user.uid);
       await setDoc(docRef, this.profile, { merge: true });
       this.isEditing = false;
     }

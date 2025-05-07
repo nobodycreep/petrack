@@ -44,27 +44,33 @@ export class PerfilComponent implements OnInit {
   }
 
   async subirImagenMascota(event: any) {
+    console.log('Iniciando subida de imagen...');
     const archivo = event.target.files[0];
-    if (!archivo) return;
+    if (!archivo) {
+      console.log('No se seleccionó archivo');
+      return;
+    }
   
+    console.log('Archivo seleccionado:', archivo.name);
+    
     const storage = getStorage();
     const ruta = `mascotas/${this.mascotaId}/foto.jpg`;
     const referencia = ref(storage, ruta);
   
     try {
-      // Subir imagen
+      console.log('Subiendo imagen a Firebase Storage...');
       await uploadBytes(referencia, archivo);
       const url = await getDownloadURL(referencia);
+      console.log('URL obtenida:', url);
   
-      // Actualizar foto localmente
-      this.mascota.foto = url;
+      // Actualización con spread operator para forzar detección de cambios
+      this.mascota = {...this.mascota, foto: url};
+      console.log('Foto actualizada localmente');
   
-      // Guardar también en Firestore
       await this.mascotaService.guardarMascota(this.mascotaId, this.mascota);
-  
-      console.log('Imagen subida y perfil actualizado con la nueva foto:', url);
+      console.log('Perfil guardado en Firestore');
     } catch (error) {
-      console.error('Error al subir imagen:', error);
+      console.error('Error completo:', error);
     }
   }
 }
